@@ -1,37 +1,22 @@
-const express = require('express');
+const router = require('express').Router();
 
-const router = express.Router();
 const {
-  getAllUsers,
-  getSingleUser,
-  createNewUser,
-  updateUser,
-  deleteUser,
-  addFriend,
-  removeFriend
-} = require('../../controllers/userController');
+    getAllUser,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser,
+    addFriend,
+    removeFriend
+  } = require('../../controllers/userController');
+  
+// /api/user //
+router.route('/').get(getAllUser).post(createUser);
 
-const User = require('../../models/User');
+// /api/user/:id //
+router.route('/:id').get(getUserById).put(updateUser).delete(deleteUser);
 
-// Route for getting all users
-router.get('/users', getAllUsers);
+// /api/user/:id/friends/:friendId //
+router.route('/:id/friends/:friendId').post(addFriend).delete(removeFriend)
 
-// Route for getting a single user by id
-router.get('/users/:id', getSingleUser);
-
-// Route for creating a new user
-router.post('/users', createNewUser);
-
-// Route for updating a user
-router.put('/users/:id', updateUser);
-
-// Route for deleting a user
-router.delete('/users/:id', deleteUser);
-
-// Route for adding a friend to a user's friend list
-router.post('/users/:userId/friends/:friendId', addFriend);
-
-// Route for removing a friend from a user's friend list
-router.delete('/users/:userId/friends/:friendId', removeFriend);
-
-module.exports = router;
+module.exports = router; 
