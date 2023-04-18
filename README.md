@@ -1,6 +1,4 @@
-# social-api
-
-# Social-Network-API
+## social-api
 
   ## Table of Contents
   * [Description](#description)
